@@ -4,24 +4,24 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="color-scheme" content="dark"/>
-    <meta name="description" content="Argos™ Autonomous Bug-Bounty Sentinel — Architectural design brief for Archer Chain Analytics' sovereign-grade threat intelligence system powered by the Alētheia™ x101 Array."/>
-    <title>Argos™ Autonomous Sentinel — Archer Chain Analytics</title>
+    <meta name="description" content="SkopOS™ — THE Operating System for Blockchain Observation. Autonomous Bug-Bounty Sentinel powered by the Alētheia™ Array. 305 blockchains and growing."/>
+    <title>SkopOS™ — THE Operating System for Blockchain Observation — Archer Chain Analytics</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --void:   #030304;
-            --gold:   #a6894c;
+            --void:     #030304;
+            --gold:     #a6894c;
             --gold-dim: rgba(166,137,76,0.12);
             --gold-mid: rgba(166,137,76,0.4);
-            --red:    #FF0000;
-            --mid:    #888890;
-            --white:  #f0f0f4;
-            --green:  #4caf82;
-            --panel:  #07070a;
-            --border: rgba(166,137,76,0.15);
-            --mono:   'IBM Plex Mono', monospace;
-            --display:'Cinzel', serif;
-            --body:   'Barlow', sans-serif;
+            --red:      #FF0000;
+            --mid:      #888890;
+            --white:    #f0f0f4;
+            --green:    #4caf82;
+            --panel:    #07070a;
+            --border:   rgba(166,137,76,0.15);
+            --mono:     'IBM Plex Mono', monospace;
+            --display:  'Cinzel', serif;
+            --body:     'Barlow', sans-serif;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,7 +37,6 @@
             min-height: 100vh;
         }
 
-        /* Subtle scan-line — same void, stays on brand */
         body::before {
             content: '';
             position: fixed;
@@ -104,6 +103,34 @@
         .prod-subtitle { font-family: var(--body); font-size: 1rem; font-weight: 300; color: var(--mid); font-style: italic; margin-bottom: 24px; }
         .prod-status-dev { display: inline-block; padding: 5px 16px; border: 1px solid rgba(166,137,76,0.4); font-family: var(--mono); font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
         .doc-ref { display: inline-block; margin-left: 12px; padding: 5px 16px; border: 1px solid rgba(166,137,76,0.2); font-family: var(--mono); font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(166,137,76,0.5); }
+
+        /* Coverage counter hero stat */
+        .coverage-hero {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin: 32px 0 12px;
+        }
+        .coverage-num {
+            font-family: var(--display);
+            font-size: clamp(4rem, 10vw, 7rem);
+            color: var(--gold);
+            line-height: 1;
+            letter-spacing: 0.05em;
+        }
+        .coverage-label {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--mid);
+            line-height: 1.6;
+        }
+        .coverage-label span {
+            display: block;
+            color: var(--gold);
+            opacity: 0.7;
+        }
 
         .gold-rule { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); opacity: 0.35; position: relative; z-index: 1; }
 
@@ -190,8 +217,6 @@
         .feed-label { color: var(--white); text-transform: uppercase; letter-spacing: 0.12em; }
         .feed-sev { font-size: 9px; letter-spacing: 0.2em; margin-left: 12px; }
         .feed-time { color: var(--gold); opacity: 0.5; white-space: nowrap; font-variant-numeric: tabular-nums; }
-        .feed-entry.new-entry { animation: feedIn 0.5s ease forwards; }
-        @keyframes feedIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Formula */
         .formula-block { background: #000; border: 1px solid rgba(166,137,76,0.2); padding: 24px 28px; font-family: var(--mono); font-size: 13px; color: var(--gold); letter-spacing: 0.08em; margin-bottom: 0; }
@@ -205,13 +230,6 @@
         .dev-notice { background: #06080a; border: 1px solid rgba(166,137,76,0.2); border-left: 3px solid var(--gold); padding: 32px 40px; }
         .dev-notice .dn-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; opacity: 0.7; }
         .dev-notice p { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); line-height: 2; margin: 0; }
-
-        /* OS Grid */
-        .os-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: rgba(166,137,76,0.12); border: 1px solid rgba(166,137,76,0.12); }
-        .os-cell { background: var(--void); padding: 28px 24px; text-align: center; }
-        .os-cell .os-icon { font-size: 1.6rem; margin-bottom: 12px; display: block; }
-        .os-cell .os-name { font-family: var(--display); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px; }
-        .os-cell .os-ver { font-family: var(--mono); font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); }
 
         /* Pricing */
         .pricing-block { background: #060408; border: 1px solid rgba(166,137,76,0.15); padding: 40px 48px; }
@@ -238,8 +256,10 @@
         @media (max-width: 720px) {
             .prod-body { padding: 0 24px 80px; }
             .prod-hero { padding: 60px 24px 40px; }
+            .corporate-header { padding: 12px 20px 5px; }
             .state-block { grid-template-columns: 1fr; gap: 8px; }
             .step { grid-template-columns: 1fr; gap: 8px; }
+            .coverage-num { font-size: 5rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -264,9 +284,9 @@
             <button class="nav-trigger">Products <span class="chevron">▾</span></button>
             <div class="nav-dropdown">
                 <span class="dd-label">Sovereign Infrastructure</span>
-                <a href="aletheia.html">Alētheia™ x101 Array</a>
+                <a href="aletheia.html">Alētheia™ Array</a>
                 <a href="inxs.html">INxS™ — Inexorabilis</a>
-                <a href="argos.html">Argos™ Autonomous Sentinel</a>
+                <a href="skopos.html">SkopOS™ — Blockchain Observation OS</a>
                 <a href="acerbe.html">AcerbE™ Digital Fingerprinting</a>
                 <span class="dd-label">Automation &amp; Delivery</span>
                 <a href="rapax.html">RaPaX™ Sovereign Vending</a>
@@ -285,355 +305,4 @@
             </div>
         </div>
         <div class="nav-item hor">
-            <button class="nav-trigger">Alētheia™ Array Hall of Records <span class="chevron">▾</span></button>
-            <div class="nav-dropdown">
-                <a href="../hall-of-records.html">Hall of Records — Main</a>
-                <a href="../signin.html">Sign In / Register</a>
-                <a href="../hall-of-records.html#access">Access Tiers</a>
-                <a href="../hall-of-records.html#tools">Available Tools</a>
-                <a href="../hall-of-records.html#charity">The Alētheia Charity</a>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<!-- HERO -->
-<div class="prod-hero">
-    <div class="prod-eyebrow">Archer Chain Analytics — ACA-ARG-001 // Autonomous Security Division</div>
-    <div class="prod-name"><em>Argos™</em></div>
-    <div class="prod-tagline">Autonomous Bug-Bounty Sentinel · Architectural Design Brief</div>
-    <p class="prod-subtitle">Sovereign-grade threat intelligence powered by the Alētheia™ x101 Array</p>
-    <span class="prod-status-dev">Live Design / In Development</span>
-    <span class="doc-ref">ACA-ARG-001</span>
-</div>
-<div class="gold-rule"></div>
-
-<main class="prod-body" id="main">
-
-    <!-- NOT AI -->
-    <div class="not-ai-block">
-        <div class="na-label">On the Record — What This Is</div>
-        <p><strong>Argos™ is not a SIEM dashboard that sends you alerts you act on manually. It is not a vulnerability scanner that produces a PDF report and considers its job done. It is not machine learning guessing at threats based on pattern proximity.</strong> It is an autonomous security monitoring and bug-bounty execution engine that ingests live chain state via Alētheia™ x101 across 115+ verified listener packages, identifies anomalies deterministically, forks the chain state in an isolated environment, reproduces the candidate condition, and packages the result as submission-ready forensic evidence — <strong>without a human in the loop between detection and proof.</strong> The distinction between a notification service and a sentinel is the difference between being told something happened and having the evidence already in your hand when you find out.</p>
-    </div>
-
-    <!-- SECTION 01: OBSERVER ARCHITECTURE -->
-    <div class="section-block">
-        <div class="sb-label">Section 01</div>
-        <h2>Observer Architecture</h2>
-        <p class="sec-desc">How 115+ listeners feed a centralized threat intelligence core</p>
-
-        <div class="two-col">
-            <div class="module">
-                <span class="module-title">Alētheia™ x101 Array — Input Layer</span>
-                <span class="listener-badge">115+ Verified Listener Packages</span>
-                <div class="listener-grid">
-                    <div class="listener-item">EthereumMainnet</div>
-                    <div class="listener-item">SolanaMainnet</div>
-                    <div class="listener-item">BitcoinMainnet</div>
-                    <div class="listener-item">AvalancheMainnet</div>
-                    <div class="listener-item">ArbitrumMainnet</div>
-                    <div class="listener-item">PolygonMainnet</div>
-                    <div class="listener-item">BaseMainnet</div>
-                    <div class="listener-item">OptimismMainnet</div>
-                    <div class="listener-item">BnbMainnet</div>
-                    <div class="listener-item">CardanoMainnet</div>
-                    <div class="listener-item">SuiMainnet</div>
-                    <div class="listener-item">+ 104 more</div>
-                </div>
-                <p class="muted-note">Ring 0/1 direct ingest. No public relay. Zero intermediary latency.</p>
-            </div>
-
-            <div class="module">
-                <span class="module-title">Threat Intelligence Core</span>
-                <div class="stat-row">
-                    <div class="stat-item">
-                        <span class="stat-label">Verified listener packages</span>
-                        <span class="stat-value gold">115+ — Version 2.0-Hardened</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Parallel observer threads</span>
-                        <span class="stat-value">115+ asyncio workers</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Evaluation latency target</span>
-                        <span class="stat-value gold">&lt;50ms per block event</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Fork instantiation target</span>
-                        <span class="stat-value">&lt;200ms at block height</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Package integrity</span>
-                        <span class="stat-value">SHA-256 fingerprinted — AcerbE™</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="op-quote" style="margin-top:24px;">
-            <p>"Argos™ exists inside the blast radius of block production — not outside it."</p>
-            <cite>Operational Principle — ACA-ARG-001</cite>
-        </div>
-    </div>
-
-    <!-- SECTION 02: STATE TRANSITION -->
-    <div class="section-block">
-        <div class="sb-label">Section 02</div>
-        <h2>State Transition Logic</h2>
-        <p class="sec-desc">Watching → Alerting → Proving → Reporting</p>
-
-        <div class="state-grid">
-            <div class="state-block">
-                <div class="state-num">01</div>
-                <div class="state-body">
-                    <span class="state-name">Watching</span>
-                    <p>Argos™ continuously observes all 115+ listener feeds and accumulates block-state data in real time. <strong>Nothing is sampled. Nothing is polled.</strong> Every event is evaluated as it arrives.</p>
-                </div>
-            </div>
-            <div class="state-block">
-                <div class="state-num">02</div>
-                <div class="state-body">
-                    <span class="state-name">Alerting</span>
-                    <p>A candidate anomaly is scored against severity thresholds, queued, and <strong>cross-referenced against active bug-bounty registries</strong> to determine submission eligibility and potential payout before proof generation begins.</p>
-                </div>
-            </div>
-            <div class="state-block">
-                <div class="state-num">03</div>
-                <div class="state-body">
-                    <span class="state-name">Proving</span>
-                    <p>The system snapshots the chain state at the exact block height and <strong>replays the candidate condition in an isolated ephemeral fork.</strong> Opcode traces, storage mutations, and execution diffs are captured as verifiable evidence.</p>
-                </div>
-            </div>
-            <div class="state-block">
-                <div class="state-num">04</div>
-                <div class="state-body">
-                    <span class="state-name">Reporting</span>
-                    <p>Validated findings are packaged with execution traces, impact analysis, severity classification, and submission metadata — <strong>formatted for direct handoff to bug-bounty platforms or private disclosure pipelines.</strong></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SECTION 03: SIMULATION LOOP -->
-    <div class="section-block">
-        <div class="sb-label">Section 03</div>
-        <h2>Simulation Loop</h2>
-        <p class="sec-desc">Ephemeral fork execution and proof generation</p>
-
-        <div class="step-list">
-            <div class="step">
-                <div class="step-num">01</div>
-                <div class="step-content">
-                    <span class="sc-title">Fork Instantiation</span>
-                    <p>Capture live state at the exact block height. Spawn an isolated ephemeral fork in under 200ms. No impact on mainnet state. No observer effect on the target condition.</p>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-num">02</div>
-                <div class="step-content">
-                    <span class="sc-title">Exploit Execution</span>
-                    <p>Reproduce the candidate condition in the sandboxed fork environment. Record all opcode-level mutations, storage state changes, and balance deltas generated by the reproduction.</p>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-num">03</div>
-                <div class="step-content">
-                    <span class="sc-title">Proof Capture</span>
-                    <p>Package execution traces, diff output, severity signal classification, and estimated impact in USD. Output is AcerbE™-fingerprinted and chain-anchored for integrity attestation.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="terminal" style="margin-top:32px;">
-            <div class="terminal-line"><span class="tl-gold">ARGOS</span> // fork instantiated at block <span class="tl-gold" id="block-num">21,847,392</span></div>
-            <div class="terminal-line">candidate: <span class="tl-gold">re-entrancy pattern — EthereumMainnet</span></div>
-            <div class="terminal-line">severity scored: <span class="tl-red">CRITICAL</span> // impact_usd: <span class="tl-gold" id="impact-val">$4,200,000</span></div>
-            <div class="terminal-line">reproducing in ephemeral fork...</div>
-            <div class="terminal-line"><span class="tl-green">✓ condition reproduced // opcode trace captured // diff packaged</span></div>
-            <div class="terminal-line"><span class="tl-green">✓ AcerbE™ fingerprint applied // chain anchor pending</span></div>
-            <div class="terminal-line">status: <span class="tl-gold">REPORT READY — submission pipeline queued</span></div>
-        </div>
-    </div>
-
-    <!-- SECTION 04: LIVE THREAT FEED -->
-    <div class="section-block">
-        <div class="sb-label">Section 04</div>
-        <h2>Live Threat Feed</h2>
-        <p class="sec-desc">Real-time anomaly tracking across active listener chains</p>
-
-        <div class="module">
-            <span class="module-title">
-                Anomaly Stream
-                <span id="feed-counter" style="color:var(--gold);margin-left:12px;">0</span> detected
-            </span>
-            <div id="feed-list" class="feed" aria-live="polite" aria-atomic="false" aria-relevant="additions">
-                <!-- populated by JS -->
-            </div>
-        </div>
-    </div>
-
-    <!-- SECTION 05: REVENUE LOGIC -->
-    <div class="section-block">
-        <div class="sb-label">Section 05</div>
-        <h2>Revenue Logic</h2>
-        <p class="sec-desc">Economic impact scoring and bounty optimization</p>
-
-        <div class="two-col">
-            <div class="module">
-                <span class="module-title">Bounty Payout Formula</span>
-                <div class="formula-block">
-                    bounty = impact_usd<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× severity_multiplier<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× program_rate
-                </div>
-                <p style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);margin-top:20px;line-height:2;">
-                    Severity multipliers are applied per-classification: Critical, High, Medium, Low. Program rate is determined by the target bounty program's published payout scale. All values calculated prior to proof generation — <strong style="color:var(--white);">unprofitable candidates are dropped before simulation resources are allocated.</strong>
-                </p>
-            </div>
-
-            <div class="module">
-                <span class="module-title">ROI Gatekeeper — Architecture Phase</span>
-                <div class="roi-value">47.3x</div>
-                <p class="roi-note">Illustrative ROI target — architectural modelling</p>
-                <div class="roi-notice">
-                    Figure based on architectural modelling only.<br>
-                    Not a guarantee of performance or bounty yield.<br>
-                    Actual ROI subject to program availability, severity classification, and disclosure outcome.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SECTION 06: PLATFORM + DEV STATUS -->
-    <div class="section-block">
-        <div class="sb-label">Section 06</div>
-        <h2>Deployment Environments</h2>
-        <p class="sec-desc">Target operating systems at production release</p>
-
-        <div class="os-grid">
-            <div class="os-cell"><span class="os-icon">🐧</span><span class="os-name">Linux</span><span class="os-ver">Ubuntu 20.04+ · Debian 11+ · RHEL 8+</span></div>
-            <div class="os-cell"><span class="os-icon">☁️</span><span class="os-name">Cloud / VPS</span><span class="os-ver">Self-hosted · Any Linux-based host</span></div>
-            <div class="os-cell"><span class="os-icon">🪟</span><span class="os-name">Windows</span><span class="os-ver">Server 2019+ · Windows 10/11</span></div>
-            <div class="os-cell"><span class="os-icon">🔒</span><span class="os-name">Zero-Trust</span><span class="os-ver">Cloudflare Zero-Trust — All Deployments</span></div>
-        </div>
-
-        <div class="dev-notice" style="margin-top:32px;">
-            <div class="dn-label">Development Status — Live Design / In Development</div>
-            <p>
-                Argos™ is in active architecture and development.<br>
-                Observer core and listener integration are being built against live Alētheia™ x101 data.<br>
-                Simulation loop and proof packaging pipeline: design finalized, implementation in progress.<br>
-                Production timeline: to be confirmed. Pre-release partnerships and enterprise design integrations available now.<br>
-                Contact: sales@mahihkan.com
-            </p>
-        </div>
-    </div>
-
-    <!-- SECTION 07: PRICING -->
-    <div class="section-block">
-        <div class="sb-label">Section 07</div>
-        <h2>Licensing &amp; Pricing</h2>
-
-        <div class="pricing-block">
-            <div class="pb-label">Pricing Structure — All Tiers in USD · Pre-Release</div>
-            <p>Argos™ pricing confirmed at production release. Pre-release design partnerships and early access agreements available now.</p>
-            <ul class="tier-list">
-                <li>Individual License — single deployment, local or VPS</li>
-                <li>Enterprise — multi-chain coverage, custom detection playbooks, SLA-backed</li>
-                <li>Bug Bounty Division Access — automated finding pipeline, submission integration</li>
-                <li>White-Label — deploy autonomous sentinel under your security brand</li>
-                <li>Pre-Release Partnership — design input, priority access at production launch</li>
-                <li>Preventative Maintenance — detection signature updates, listener patches</li>
-            </ul>
-            <a href="mailto:sales@mahihkan.com?subject=Argos Pre-Release Inquiry" class="cta-btn">Express Interest</a>
-        </div>
-    </div>
-
-    <div class="acerbe-badge"><span class="dot"></span>AcerbE™ Forensic Fingerprint Active — All Proof Packages Chain-Anchored</div>
-
-</main>
-
-<footer>
-    <div class="footer-line"></div>
-    <div class="footer-content">
-        <div><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></div>
-        <div class="footer-center">Sovereignty // Integrity // Inexorabilis</div>
-        <div>© 2026 All Rights Reserved</div>
-    </div>
-</footer>
-
-<script>
-(function () {
-    const ANOMALIES = [
-        "Uniswap V3 liquidity imbalance",
-        "Solana program anomaly detected",
-        "Arbitrum bridge inconsistency",
-        "Ethereum re-entrancy candidate",
-        "BNB Chain oracle deviation",
-        "Polygon validator gap",
-        "Avalanche subnet irregularity",
-        "Base L2 sequencer latency spike",
-        "Optimism withdrawal anomaly",
-        "Aave interest rate manipulation candidate",
-        "Curve pool imbalance detected",
-        "StarkNet state diff mismatch",
-        "Hyperliquid liquidation edge case",
-        "Sui object mutation anomaly",
-        "THORChain swap deviation detected",
-    ];
-
-    const SEVERITY = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'];
-    const SEV_COLOR = {
-        CRITICAL: '#FF0000',
-        HIGH:     '#d4844c',
-        MEDIUM:   '#a6894c',
-        LOW:      '#4caf82',
-    };
-
-    const feedList = document.getElementById('feed-list');
-    const counter  = document.getElementById('feed-counter');
-    let count = 0;
-    const MAX = 6;
-
-    function addEntry() {
-        const label = ANOMALIES[Math.floor(Math.random() * ANOMALIES.length)];
-        const sev   = SEVERITY[Math.floor(Math.random() * SEVERITY.length)];
-        const now   = new Date().toLocaleTimeString('en-CA', { hour12: false });
-
-        const el = document.createElement('div');
-        el.className = 'feed-entry new-entry';
-        el.innerHTML =
-            `<span><span class="feed-label">${label.toUpperCase()}</span><span class="feed-sev" style="color:${SEV_COLOR[sev]};letter-spacing:0.2em;">${sev}</span></span>` +
-            `<span class="feed-time">${now}</span>`;
-
-        feedList.prepend(el);
-        count++;
-        counter.textContent = count;
-
-        while (feedList.children.length > MAX) feedList.removeChild(feedList.lastChild);
-    }
-
-    // Seed 3 entries on load
-    addEntry(); addEntry(); addEntry();
-
-    // Randomized intervals — 4–8s
-    function scheduleNext() {
-        setTimeout(() => { addEntry(); scheduleNext(); }, 4200 + Math.random() * 3800);
-    }
-    scheduleNext();
-
-    // Terminal block number drift
-    const blockEl  = document.getElementById('block-num');
-    const impactEl = document.getElementById('impact-val');
-    const IMPACTS  = ['$1,840,000','$4,200,000','$780,000','$12,500,000','$350,000','$6,100,000'];
-    let block = 21847392;
-
-    setInterval(() => {
-        block += Math.floor(Math.random() * 12) + 1;
-        blockEl.textContent  = block.toLocaleString('en-US');
-        impactEl.textContent = IMPACTS[Math.floor(Math.random() * IMPACTS.length)];
-    }, 6000);
-})();
-</script>
-</body>
-</html>
+            <button class="nav-trigger">Alē
