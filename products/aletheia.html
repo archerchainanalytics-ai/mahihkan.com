@@ -64,15 +64,10 @@
         
         .index-wrapper{height:400px;overflow-y:auto;border:1px solid rgba(166,137,76,0.15);background:#050507;padding:20px;margin-bottom:16px;}
         .index-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
-        .index-item{font-family:var(--mono);font-size:10px;letter-spacing:0.05em;color:var(--mid);padding:6px 12px;background:#09090d;border-left:2px solid rgba(166,137,76,0.2);display:flex;align-items:center;}
+        .index-item{font-family:var(--mono);font-size:10px;letter-spacing:0.05em;color:var(--mid);padding:6px 12px;background:#09090d;border-left:2px solid rgba(166,137,76,0.2);display:flex;align-items:center;transition:opacity 0.2s;}
+        .index-item.hidden{display:none;}
         .index-item span{color:var(--gold);margin-right:8px;font-size:8px;opacity:0.6;}
         
-        .pkg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin:32px 0;}
-        .pkg-card{border:1px solid rgba(166,137,76,0.15);padding:32px;background:#060408;position:relative;}
-        .pkg-card .pkg-tier{font-family:var(--mono);font-size:8px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;display:block;}
-        .pkg-card h3{font-family:var(--display);font-size:1.3rem;letter-spacing:0.1em;color:var(--white);margin-bottom:16px;text-transform:uppercase;}
-        .pkg-card p{font-size:0.95rem;line-height:1.6;color:var(--mid);margin-bottom:0;}
-
         .pricing-block{background:#060408;border:1px solid rgba(166,137,76,0.15);padding:40px 48px;margin-top:40px;}
         .pricing-block .pb-label{font-family:var(--mono);font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:0.8;}
         .pricing-block p{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);line-height:2;margin-bottom:20px;}
@@ -89,107 +84,4 @@
     </style>
 </head>
 <body>
-<div class="corporate-header"><div>BIN754975035</div><div class="header-center">Archer Chain Analytics</div><div>GST/HST754975035RT0001</div></div>
-<div class="gold-line"></div>
-<nav class="site-nav"><div class="nav-inner">
-    <div class="nav-item"><button class="nav-trigger">Products <span class="chevron">▾</span></button><div class="nav-dropdown"><span class="dd-label">Sovereign Infrastructure</span><a href="aletheia.html">The Alētheia™ Array</a><a href="listeners.html">Alētheia™ Listeners</a><a href="inxs.html">INxS™ — Inexorabilis</a><a href="argos.html">SkopOS™ The Autonomous Sentinel</a><a href="acerbe.html">AcerbE™ Digital Fingerprinting</a></div></div>
-    <div class="nav-item"><button class="nav-trigger">Services <span class="chevron">▾</span></button><div class="nav-dropdown"><a href="../services.html#consulting">Consulting</a><a href="../services.html#installation">Installation</a><a href="../services.html#whitelabel">White-Label Licensing</a></div></div>
-</div></nav>
-
-<div class="prod-hero">
-    <div class="prod-eyebrow">Sovereign Ingestion &amp; Verification Layer</div>
-    <div class="prod-name">Alētheia™ <em>Sovereign Listeners</em></div>
-    <div class="prod-tagline">Enterprise-Grade Blockchain Ingestion Substrate</div>
-    <span class="prod-status">Hardened Core</span>
-</div>
-<div class="gold-rule"></div>
-
-<main class="prod-body">
-    <div class="not-ai-block">
-        <div class="na-label">The Ingestion Reality // Built for Fragile Networks</div>
-        <p><strong>Most blockchain listeners are fundamentally fragile.</strong> They crash during minor RPC instability, introduce silent data gaps during connection handshakes, blindly accept upstream data payloads, and lose state synchronization under massive concurrent spikes. <strong>Alētheia™ Sovereign Listeners reject external dependencies.</strong> Engineered as the zero-trust data intake core powering the Alētheia™ Hall of Records, these nodes run custom programmatic state reconstruction designed for unconditional continuity.</p>
-    </div>
-
-    <div class="section-block">
-        <div class="sb-label">01 // Architectural Pillars</div>
-        <h2>What Makes Alētheia™ Different</h2>
-        <p>Instead of acting as a generic wrapper around public network nodes, Alētheia™ operates a defensive, proactive pipeline across 333 connected blockchain ecosystems.</p>
-        
-        <div class="architecture-grid">
-            <div class="arch-card">
-                <h3>Zero-Trust Verification</h3>
-                <p>Every chain emission undergoes deep signature and format normalization before internal ingestion. We do not trust:</p>
-                <ul>
-                    <li>Naked RPC Responses</li>
-                    <li>Raw WebSocket Emissions</li>
-                    <li>Upstream API aggregators</li>
-                    <li>Third-party caching states</li>
-                </ul>
-            </div>
-            <div class="arch-card">
-                <h3>Deterministic Recovery</h3>
-                <p>When networks degrade or face local outages, our deterministic state-machine prevents execution gaps via continuous checkpoint verification:</p>
-                <ul>
-                    <li>Automated Gap Scanning</li>
-                    <li>Historical Replay Recovery</li>
-                    <li>Persistent Checkpoint State</li>
-                    <li>Atomic Sync Continuity</li>
-                </ul>
-            </div>
-            <div class="arch-card">
-                <h3>Hostile Environment Survival</h3>
-                <p>Designed for mission-critical runtime architectures where dropped bytes mean compromised analytics:</p>
-                <ul>
-                    <li>Exponential Backoff + Jitter</li>
-                    <li>Websocket Liveness Handshakes</li>
-                    <li>Orchestrated Provider Failover</li>
-                    <li>Active Provider Rotation</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="section-block">
-        <div class="sb-label">02 // Core Interface Specification</div>
-        <h2>BaseChainListener Native Interface</h2>
-        <p>The operational framework exposed to bare-metal systems. Clean, explicit, and completely decoupled from fragile third-party dependencies.</p>
-        <table class="spec-table">
-            <thead><tr><th>Engine Hook</th><th>Functional Execution Mandate</th></tr></thead>
-            <tbody>
-                <tr><td>normalizeAndVerify(raw: any)</td><td>Enforces structural validation on inbound events; strips corrupt payloads before processing.</td></tr>
-                <tr><td>recoverMissedEvents()</td><td>Queries missed block boundaries automatically post-disconnection to guarantee a continuous ledger history.</td></tr>
-                <tr><td>getLastCheckpoint()</td><td>Reads current atomic block tracking metrics from cold storage to establish system state.</td></tr>
-                <tr><td>updateCheckpoint()</td><td>Writes verified blockchain height changes to state tables atomically with zero caching latencies.</td></tr>
-                <tr><td>switchProvider()</td><td>Abstracts provider infrastructure dynamically, executing rotational or emergency fallback routing.</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="section-block">
-        <div class="sb-label">03 // Manifest Matrix</div>
-        <h2>Covered Registries (333 Networks)</h2>
-        <p>Comprehensive ecosystem ingestion support matrix across mainnets, rollups, protocols, and test verification channels.</p>
-        
-        <div class="search-container">
-            <input type="text" id="chainSearch" class="search-box" placeholder="FILTER SOVEREIGN CORES... (E.G. BITCOIN, SCROLL, ZK)">
-        </div>
-        
-        <div class="index-wrapper">
-            <div class="index-grid" id="manifestGrid"></div>
-        </div>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const networks = ["AMMProtocol","Aave","AaveArbitrum","AaveBase","AaveOptimism","Abstract","AbstractTestnet","Acala","Across","Aether","Akash","Algorand","AllBridge","Ancient8","ApeChain","Aptos","AptosTestnet","Arbitrum","ArbitrumNova","ArbitrumOne","Archway","Ascendant","AssetAllocation","Astar","Atom","Atrix","AuctionHouse","Aurora","AuroraOther","Avalanche","AvalancheC","AvalancheFuji","AvalancheFujiv2","Axelar","BOB","Balancer","BalancerLayer2","Bamboo","Base","BaseL3Aerodrome","Berachain","Bifrost","Binance","BinanceSmartChain","Bitcoin","BitcoinCash","BitcoinSv","Blast","BlastL3Example","Bnb","Boba","BorrowingMarket","BridgeProtocol","Bybit","Caduceus","Canto","Cardano","Casper","Celestia","Celo","Chainlink","Chiliz","CollateralPool","CollectionManager","Composable","Compound","Convex","Cope","CoreDao","Coreum","Corn","Cosmos","Cosmos Hub","CreatorFund","CreatorProtocol","Cronos","Cropper","CrossChain","Crystalline","Curve","CurveLayer2","Cyber","DAOGovernance","Dash","DataFeed","Degen","DegenChain","DerivativeMarket","Desmos","Diva","Dogecoin","Drift","Dydx","Eclipse","EclipseMainnet","Elastos","Elysium","Enjin","Entangle","Ergo","EscrowService","Ethereal","Ethereum","EthereumDencun","EthereumShanghai","Evmos","Exosama","Fantom","Fetch","Filecoin","Flare","Flux","Frame","Fraxtal","Fuji","FuturesExchange","GMX","Gala","GamingNetwork","Garuda","Gate","Gnosis","GovernanceToken","Gravity","GravityBridge","Harmony","Harmony2","HecoChain","Hedera","Helium","Huobi","Hyperliquid","Hyperspace","ICP","Icon","ImmutableX","Injective","Ink","InsuranceFund","InternetComputer","InvestmentDAO","IoTeX","Iris","Jito","Juno","Kaia","Kaspa","Katana","Kava","Kinto","KuCoin","Kujira","Kusama","LendingProtocol","Lido","Lifinity","Lightning","Linea","LineaL3Example","LiquidityMining","LiquidityPool","Lisk","LiskEVM","Litecoin","Litmus","MagicEden","MakerDao","MantaAtlantic","Mantle","MarginTrading","Marinade","MarinadeFinance","MarinadeStake","MarinadeValidator","Marlin","MegaEth","Merlin","Metaplex","MetaverseHub","Meteora","Metis","Mina","Mint","Mode","Monad","Monero","Moonbase","Moonbeam","Moonriver","Morph","Morpheus","Movement","MovementBitcoin","NFTMarketplace","Namada","Near","Neon","NeonEvm","Nervos","NervosCkb","Neutron","Nexus","Nomad","Oasys","Obol","Okx","Ontology","OpBnb","Optimism","OptionsProtocol","Orca","OrcaWhirlpools","Osmosis","Pactus","Passage","Penumbra","PerpetualSwaps","Persistence","PhantomNetwork","Pinnacle","Plume","Polkadot","Polygon","PolygonZkEvm","PortfolioManager","PriceOracle","Prism","Pryzm","PublicGoodsNetwork","Pulsar","Pump","Pyth","Quill","Ravencoin","Raydium","RaydiumFusion","Ripple","RiskManagement","RiskPool","Robonomics","Ronin","RoyaltyEngine","SXNetwork","SailGP","Scroll","ScrollL3Example","SecretNetwork","Sei","Sentinel","Serum","Sesame","ShdwDrive","Shiden","SkaleMainnet","Socean","SocialToken","Solana","Solanart","Sommelier","Sonic","SonicSvm","StakeAggregator","StakePool","StakingPool","Stargaze","StarkNetMainnet","Starknet","Stellar","Step","Stratos","Stride","Sui","SwapEngine","Switchboard","Symmetry","SyndicateFinance","THORChain","Taiko","TaikoHekla","TaikoMainnet","Telos","Tendermint","Tensor","TensorSwap","Tezos","Theta","ThunderCore","TokenFactory","Tomo","Ton","Treasury","TreasuryManagement","Tron","Ultron","Unichain","Uniswap","UniswapLayer2","Uxd","ValidatorDAO","ValidatorNetwork","ValidatorPool","Vanguard","VaultFinance","VeChain","Velas","VirtualAssets","Vortex","Waves","Wax","Wemix","Worldchain","Wormhole","WrappedAssets","XLayer","Xai","Xdc","XinFin","Xrp","Xrpl","Yearn","YieldFarming","YieldProtocol","ZKFair","ZKLinkNova","ZKSpace","Zcash","Zenith","Zephyr","ZetaChain","Zilliqa","ZkSyncEra","ZkSyncLite","dYdXCosmos","xDai","zkLink"];
-                
-                const grid = document.getElementById('manifestGrid');
-                if (grid) {
-                    networks.forEach((net, index) => {
-                        const cell = document.createElement('div');
-                        cell.className = 'index-item';
-                        cell.innerHTML = `<span>[${String(index + 1).padStart(3, '0')}]</span> ${net}`;
-                        grid.appendChild(cell);
-                    });
-                }
-
-                
+<div class="corporate-header"><div>BIN754975035</div><div class="header-center">Archer Chain Analytics</div><div>GST/HST754975035RT0
