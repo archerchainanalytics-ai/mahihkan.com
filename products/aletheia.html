@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Alētheia™ Sovereign Chain Listeners — Archer Chain Analytics</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500;600&amp;family=Barlow:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
     <style>
         :root{--void:#030304;--gold:#a6894c;--gold-dim:rgba(166,137,76,0.12);--red:#FF0000;--mid:#888890;--white:#f0f0f4;--green:#4caf82;--mono:'IBM Plex Mono',monospace;--display:'Cinzel',serif;--body:'Barlow',sans-serif;}
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -57,6 +58,15 @@
         .spec-table td:first-child{color:var(--white);font-weight:500;}
         .spec-table tr:last-child td{border-bottom:none;}
         
+        .search-container{margin:32px 0 16px;}
+        .search-box{width:100%;background:#060408;border:1px solid rgba(166,137,76,0.3);padding:14px 20px;font-family:var(--mono);font-size:11px;letter-spacing:0.1em;color:var(--white);outline:none;transition:border-color 0.2s;}
+        .search-box:focus{border-color:var(--gold);}
+        
+        .index-wrapper{height:400px;overflow-y:auto;border:1px solid rgba(166,137,76,0.15);background:#050507;padding:20px;margin-bottom:16px;}
+        .index-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
+        .index-item{font-family:var(--mono);font-size:10px;letter-spacing:0.05em;color:var(--mid);padding:6px 12px;background:#09090d;border-left:2px solid rgba(166,137,76,0.2);display:flex;align-items:center;}
+        .index-item span{color:var(--gold);margin-right:8px;font-size:8px;opacity:0.6;}
+        
         .pkg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin:32px 0;}
         .pkg-card{border:1px solid rgba(166,137,76,0.15);padding:32px;background:#060408;position:relative;}
         .pkg-card .pkg-tier{font-family:var(--mono);font-size:8px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;display:block;}
@@ -96,14 +106,14 @@
 
 <main class="prod-body">
     <div class="not-ai-block">
-        <div class="na-label">The Ingestion Reality — Built for Fragile Networks</div>
+        <div class="na-label">The Ingestion Reality // Built for Fragile Networks</div>
         <p><strong>Most blockchain listeners are fundamentally fragile.</strong> They crash during minor RPC instability, introduce silent data gaps during connection handshakes, blindly accept upstream data payloads, and lose state synchronization under massive concurrent spikes. <strong>Alētheia™ Sovereign Listeners reject external dependencies.</strong> Engineered as the zero-trust data intake core powering the Alētheia™ Hall of Records, these nodes run custom programmatic state reconstruction designed for unconditional continuity.</p>
     </div>
 
     <div class="section-block">
         <div class="sb-label">01 // Architectural Pillars</div>
         <h2>What Makes Alētheia™ Different</h2>
-        <p>Instead of acting as a generic wrapper around public network nodes, Alētheia™ operates an defensive, proactive pipeline across 333 connected blockchain ecosystems.</p>
+        <p>Instead of acting as a generic wrapper around public network nodes, Alētheia™ operates a defensive, proactive pipeline across 333 connected blockchain ecosystems.</p>
         
         <div class="architecture-grid">
             <div class="arch-card">
@@ -156,47 +166,30 @@
     </div>
 
     <div class="section-block">
-        <div class="sb-label">03 // Cross-Ecosystem Alignment</div>
-        <h2>Unified Event Normalization</h2>
-        <p>Handling 333 networks means resolving distinct schemas, raw transaction structures, contract formatting, and timestamp variance. Alētheia™ maps disjointed chain environments into a unified intelligence schema. This specialized normalization layer explicitly targets high-throughput enterprise systems:</p>
-        <p><strong>Institutional Forensics &amp; Compliance · High-Frequency Trading Substrates · Cross-Chain Analytics Engines · Hardened AI Training Datasets · Low-Latency Protocol Observability</strong></p>
-    </div>
-
-    <div class="section-block">
-        <div class="sb-label">04 // Deployment Packaging Models</div>
-        <h2>Available Deployments</h2>
-        <div class="pkg-grid">
-            <div class="pkg-card">
-                <span class="pkg-tier">Tier I</span>
-                <h3>Individual Listener</h3>
-                <p>Acquire single, optimized binary nodes targeting proprietary isolated networks or specific infrastructure assets.</p>
-            </div>
-            <div class="pkg-card">
-                <span class="pkg-tier">Tier II</span>
-                <h3>Ecosystem Bundles</h3>
-                <p>Packaged suites focused on shared architectures. Available options include full EVM suites, ZK Rollup sets, UTXO networks, or Cosmos ecosystems.</p>
-            </div>
-            <div class="pkg-card">
-                <span class="pkg-tier">Tier III</span>
-                <h3>Sovereign Stack</h3>
-                <p>The comprehensive Alētheia™ collection. Deploys full multi-chain orchestration, real-time normalization channels, and dedicated fallback automation.</p>
-            </div>
+        <div class="sb-label">03 // Manifest Matrix</div>
+        <h2>Covered Registries (333 Networks)</h2>
+        <p>Comprehensive ecosystem ingestion support matrix across mainnets, rollups, protocols, and test verification channels.</p>
+        
+        <div class="search-container">
+            <input type="text" id="chainSearch" class="search-box" placeholder="FILTER SOVEREIGN CORES... (E.G. BITCOIN, SCROLL, ZK)">
         </div>
-    </div>
-
-    <div class="section-block">
-        <div class="sb-label">05 // Strategic Licensing</div>
-        <h2>The Cost of Truth</h2>
-        <div class="pricing-block">
-            <div class="pb-label">Operational Realities // Enterprise Infrastructure</div>
-            <p>Hobby components optimize for raw connectivity. Alētheia™ explicitly handles continuity, immutable validation, and deterministic node failure survival. This architecture mimics the foundational systems run by premier security intelligence agencies globally.</p>
-            <a href="mailto:sales@mahihkan.com?subject=Aletheia Listener Licensing Request" class="cta-btn">Initiate Node Allocation</a>
+        
+        <div class="index-wrapper">
+            <div class="index-grid" id="manifestGrid"></div>
         </div>
-    </div>
-    
-    <div class="acerbe-badge"><span class="dot"></span>AcerbE™ Forensic Fingerprint Active — All Records Integrity-Attested</div>
-</main>
 
-<footer><div class="footer-line"></div><div class="footer-content"><div><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></div><div class="footer-center">Sovereignty // Integrity // Inexorabilis</div><div>© 2026 All Rights Reserved</div></div></footer>
-</body>
-</html>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const networks = ["AMMProtocol","Aave","AaveArbitrum","AaveBase","AaveOptimism","Abstract","AbstractTestnet","Acala","Across","Aether","Akash","Algorand","AllBridge","Ancient8","ApeChain","Aptos","AptosTestnet","Arbitrum","ArbitrumNova","ArbitrumOne","Archway","Ascendant","AssetAllocation","Astar","Atom","Atrix","AuctionHouse","Aurora","AuroraOther","Avalanche","AvalancheC","AvalancheFuji","AvalancheFujiv2","Axelar","BOB","Balancer","BalancerLayer2","Bamboo","Base","BaseL3Aerodrome","Berachain","Bifrost","Binance","BinanceSmartChain","Bitcoin","BitcoinCash","BitcoinSv","Blast","BlastL3Example","Bnb","Boba","BorrowingMarket","BridgeProtocol","Bybit","Caduceus","Canto","Cardano","Casper","Celestia","Celo","Chainlink","Chiliz","CollateralPool","CollectionManager","Composable","Compound","Convex","Cope","CoreDao","Coreum","Corn","Cosmos","Cosmos Hub","CreatorFund","CreatorProtocol","Cronos","Cropper","CrossChain","Crystalline","Curve","CurveLayer2","Cyber","DAOGovernance","Dash","DataFeed","Degen","DegenChain","DerivativeMarket","Desmos","Diva","Dogecoin","Drift","Dydx","Eclipse","EclipseMainnet","Elastos","Elysium","Enjin","Entangle","Ergo","EscrowService","Ethereal","Ethereum","EthereumDencun","EthereumShanghai","Evmos","Exosama","Fantom","Fetch","Filecoin","Flare","Flux","Frame","Fraxtal","Fuji","FuturesExchange","GMX","Gala","GamingNetwork","Garuda","Gate","Gnosis","GovernanceToken","Gravity","GravityBridge","Harmony","Harmony2","HecoChain","Hedera","Helium","Huobi","Hyperliquid","Hyperspace","ICP","Icon","ImmutableX","Injective","Ink","InsuranceFund","InternetComputer","InvestmentDAO","IoTeX","Iris","Jito","Juno","Kaia","Kaspa","Katana","Kava","Kinto","KuCoin","Kujira","Kusama","LendingProtocol","Lido","Lifinity","Lightning","Linea","LineaL3Example","LiquidityMining","LiquidityPool","Lisk","LiskEVM","Litecoin","Litmus","MagicEden","MakerDao","MantaAtlantic","Mantle","MarginTrading","Marinade","MarinadeFinance","MarinadeStake","MarinadeValidator","Marlin","MegaEth","Merlin","Metaplex","MetaverseHub","Meteora","Metis","Mina","Mint","Mode","Monad","Monero","Moonbase","Moonbeam","Moonriver","Morph","Morpheus","Movement","MovementBitcoin","NFTMarketplace","Namada","Near","Neon","NeonEvm","Nervos","NervosCkb","Neutron","Nexus","Nomad","Oasys","Obol","Okx","Ontology","OpBnb","Optimism","OptionsProtocol","Orca","OrcaWhirlpools","Osmosis","Pactus","Passage","Penumbra","PerpetualSwaps","Persistence","PhantomNetwork","Pinnacle","Plume","Polkadot","Polygon","PolygonZkEvm","PortfolioManager","PriceOracle","Prism","Pryzm","PublicGoodsNetwork","Pulsar","Pump","Pyth","Quill","Ravencoin","Raydium","RaydiumFusion","Ripple","RiskManagement","RiskPool","Robonomics","Ronin","RoyaltyEngine","SXNetwork","SailGP","Scroll","ScrollL3Example","SecretNetwork","Sei","Sentinel","Serum","Sesame","ShdwDrive","Shiden","SkaleMainnet","Socean","SocialToken","Solana","Solanart","Sommelier","Sonic","SonicSvm","StakeAggregator","StakePool","StakingPool","Stargaze","StarkNetMainnet","Starknet","Stellar","Step","Stratos","Stride","Sui","SwapEngine","Switchboard","Symmetry","SyndicateFinance","THORChain","Taiko","TaikoHekla","TaikoMainnet","Telos","Tendermint","Tensor","TensorSwap","Tezos","Theta","ThunderCore","TokenFactory","Tomo","Ton","Treasury","TreasuryManagement","Tron","Ultron","Unichain","Uniswap","UniswapLayer2","Uxd","ValidatorDAO","ValidatorNetwork","ValidatorPool","Vanguard","VaultFinance","VeChain","Velas","VirtualAssets","Vortex","Waves","Wax","Wemix","Worldchain","Wormhole","WrappedAssets","XLayer","Xai","Xdc","XinFin","Xrp","Xrpl","Yearn","YieldFarming","YieldProtocol","ZKFair","ZKLinkNova","ZKSpace","Zcash","Zenith","Zephyr","ZetaChain","Zilliqa","ZkSyncEra","ZkSyncLite","dYdXCosmos","xDai","zkLink"];
+                
+                const grid = document.getElementById('manifestGrid');
+                if (grid) {
+                    networks.forEach((net, index) => {
+                        const cell = document.createElement('div');
+                        cell.className = 'index-item';
+                        cell.innerHTML = `<span>[${String(index + 1).padStart(3, '0')}]</span> ${net}`;
+                        grid.appendChild(cell);
+                    });
+                }
+
+                
