@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkopOS™ | Autonomous Threat Intelligence — Archer Chain Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void:#030304;--gold:#a6894c;--gold-dim:rgba(166,137,76,0.12);
+            --red:#FF0000;--mid:#888890;--white:#f0f0f4;--green:#4caf82;
+            --mono:'IBM Plex Mono',monospace;--display:'Cinzel',serif;--body:'Barlow',sans-serif;
+        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+        body {
+            background: radial-gradient(circle at center, #0a0a0f 0%, var(--void) 100%);
+            color: var(--white);
+            font-family: var(--body);
+            line-height: 1.7;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(166,137,76,0.03), transparent);
+            animation: scan 8s linear infinite;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        @keyframes scan { 0% { top: -100px; } 100% { top: 100%; } }
+
+        /* CORPORATE HEADER */
+        .corporate-header{width:100%;padding:15px 40px 5px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);}
+        .header-center{font-family:var(--display);font-size:10px;letter-spacing:4px;font-weight:600;}
+        .gold-line{width:100%;height:1px;background:var(--gold);opacity:0.6;}
+
+        /* TICKER */
+        .ticker-wrapper{width:100%;height:24px;background:#07070a;border-bottom:1px solid rgba(166,137,76,0.2);overflow:hidden;position:relative;display:flex;align-items:center;}
+        .ticker-track{display:flex;align-items:center;white-space:nowrap;will-change:transform;}
+        .ticker-track.animating{animation:ticker-scroll linear infinite;}
+        @keyframes ticker-scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+        .ticker-item{display:inline-flex;align-items:center;gap:10px;padding:0 32px;height:24px;font-family:var(--mono);border-right:1px solid rgba(166,137,76,0.12);}
+        .ticker-symbol{color:var(--gold);font-weight:600;font-size:10px;letter-spacing:0.2em;}
+        .ticker-price{color:var(--white);font-size:12px;}
+        .ticker-change{font-size:10px;font-weight:500;}
+        .up{color:var(--green);}.down{color:var(--red);}
+
+        /* NAV */
+        .site-nav{width:100%;background:#0a0a0d;border-bottom:1px solid rgba(166,137,76,0.3);position:relative;z-index:100;}
+        .nav-inner{max-width:1400px;margin:0 auto;height:50px;position:relative;}
+        .nav-item{position:absolute;top:0;height:100%;display:flex;align-items:center;}
+        .nav-item.products-pos{left:25%;transform:translateX(-50%);}
+        .nav-item.hall-pos{left:50%;transform:translateX(-50%);}
+        .nav-item.services-pos{left:75%;transform:translateX(-50%);}
+        .nav-trigger{display:flex;align-items:center;gap:8px;padding:10px 20px;font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);cursor:pointer;border:none;background:none;white-space:nowrap;}
+        .nav-dropdown{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);min-width:280px;background:#0d0d10;border:1px solid rgba(166,137,76,0.25);border-top:2px solid var(--gold);}
+        .nav-item:hover .nav-dropdown{display:block;}
+        .nav-dropdown a{display:block;padding:12px 20px;font-family:var(--mono);font-size:9px;color:var(--mid);text-decoration:none;border-bottom:1px solid rgba(166,137,76,0.08);}
+        .nav-dropdown a:hover{color:var(--gold);background:var(--gold-dim);}
+
+        /* HERO */
+        header{text-align:center;margin:80px 0 100px;}
+        .brand-logo{font-family:var(--display);font-size:clamp(3rem,9vw,6rem);letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;font-weight:400;margin-bottom:16px;}
+        .hero-sub{font-family:var(--mono);font-size:10px;letter-spacing:4px;color:var(--mid);text-transform:uppercase;margin-bottom:40px;}
+        .red-quote{color:var(--red);font-family:var(--mono);font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;text-shadow:0 0 10px rgba(255,0,0,0.2);}
+
+        /* CONTENT */
+        .content-body{max-width:850px;margin:0 auto 120px;padding:0 20px;}
+
+        .article-box h2{font-family:var(--display);font-size:1.8rem;color:var(--gold);margin-bottom:40px;text-align:center;}
+        .article-box p{font-weight:300;line-height:2;font-size:1.05rem;color:var(--mid);margin-bottom:30px;text-align:justify;}
+
+        /* STATS STRIP */
+        .stats-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: rgba(166,137,76,0.2);
+            margin: 60px 0;
+        }
+        .stat-cell {
+            background: #0d0d10;
+            padding: 24px 20px;
+            text-align: center;
+        }
+        .stat-num {
+            font-family: var(--display);
+            font-size: 1.8rem;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 6px;
+        }
+        .stat-label {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+
+        /* ENTERPRISE PORTAL */
+        .enterprise-portal {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            margin: 80px 0;
+            padding: 50px;
+            background: #0d0d10;
+            border: 1px solid var(--gold-dim);
+            position: relative;
+        }
+        .enterprise-portal::before {
+            content: "INSTITUTIONAL TIER";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--void);
+            padding: 0 15px;
+            font-family: var(--mono);
+            color: var(--gold);
+            font-size: 9px;
+            letter-spacing: 3px;
+        }
+        .ent-list{list-style:none;font-family:var(--mono);font-size:11px;line-height:2.8;color:var(--white);}
+        .ent-list li::before{content:"> ";color:var(--gold);}
+
+        /* STATE MACHINE */
+        .state-machine {
+            margin: 80px 0;
+            border: 1px solid var(--gold-dim);
+            position: relative;
+        }
+        .state-machine::before {
+            content: "STATE TRANSITION LOGIC";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--void);
+            padding: 0 15px;
+            font-family: var(--mono);
+            color: var(--gold);
+            font-size: 9px;
+            letter-spacing: 3px;
+        }
+        .state-row {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            border-bottom: 1px solid rgba(166,137,76,0.1);
+        }
+        .state-row:last-child { border-bottom: 0; }
+        .state-tag {
+            padding: 20px;
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+            border-right: 1px solid rgba(166,137,76,0.1);
+            display: flex;
+            align-items: center;
+        }
+        .state-desc {
+            padding: 20px 24px;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--mid);
+            line-height: 1.8;
+        }
+        .state-desc strong { color: var(--white); display: block; margin-bottom: 4px; font-size: 12px; }
+
+        /* SIM LOOP */
+        .sim-loop {
+            margin: 80px 0;
+            border: 1px solid var(--gold-dim);
+            position: relative;
+        }
+        .sim-loop::before {
+            content: "SIMULATION LOOP";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--void);
+            padding: 0 15px;
+            font-family: var(--mono);
+            color: var(--gold);
+            font-size: 9px;
+            letter-spacing: 3px;
+        }
+        .sim-step {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            border-bottom: 1px solid rgba(166,137,76,0.1);
+        }
+        .sim-step:last-child { border-bottom: 0; }
+        .sim-num {
+            font-family: var(--display);
+            font-size: 2rem;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid rgba(166,137,76,0.1);
+            padding: 20px;
+        }
+        .sim-content {
+            padding: 20px 24px;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--mid);
+            line-height: 1.8;
+        }
+        .sim-content strong { color: var(--white); display: block; margin-bottom: 4px; font-size: 12px; }
+
+        /* LIVE FEED */
+        .live-feed {
+            margin: 80px 0;
+            background: #0d0d10;
+            border: 1px solid var(--gold-dim);
+            position: relative;
+        }
+        .live-feed::before {
+            content: "LIVE THREAT FEED";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--void);
+            padding: 0 15px;
+            font-family: var(--mono);
+            color: var(--gold);
+            font-size: 9px;
+            letter-spacing: 3px;
+        }
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px 14px;
+            border-bottom: 1px solid rgba(166,137,76,0.1);
+        }
+        .feed-header-label { font-family: var(--mono); font-size: 9px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
+        .feed-counter { font-family: var(--mono); font-size: 12px; color: var(--gold); }
+        .feed-entry {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 12px 24px;
+            border-bottom: 1px solid rgba(166,137,76,0.07);
+            font-family: var(--mono);
+            font-size: 11px;
+        }
+        .feed-entry:last-child { border-bottom: 0; }
+        .feed-label { color: var(--mid); }
+        .feed-age { color: rgba(166,137,76,0.5); white-space: nowrap; }
+        @keyframes feedIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+        .feed-entry.new-entry { animation: feedIn 0.3s linear forwards; }
+
+        /* REVENUE */
+        .revenue-block {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 1px;
+            background: rgba(166,137,76,0.2);
+            margin: 80px 0;
+        }
+        .rev-cell {
+            background: #0d0d10;
+            padding: 36px;
+        }
+        .rev-label { font-family: var(--mono); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+        .rev-formula { font-family: var(--mono); font-size: 12px; color: var(--white); line-height: 1.8; }
+        .rev-num { font-family: var(--display); font-size: 3rem; color: var(--gold); }
+        .rev-note { font-family: var(--mono); font-size: 9px; color: var(--mid); margin-top: 10px; letter-spacing: 1px; border: 1px solid rgba(166,137,76,0.15); padding: 8px 12px; }
+
+        /* QUOTE */
+        .op-quote {
+            background: rgba(166,137,76,0.03);
+            border-left: 2px solid var(--gold);
+            padding: 30px 40px;
+            margin: 60px 0;
+        }
+        .op-quote p { font-family: var(--mono); font-size: 12px; color: var(--mid); font-style: italic; line-height: 1.8; }
+        .op-quote cite { font-family: var(--mono); font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; display: block; margin-top: 12px; font-style: normal; }
+
+        /* FOUNDERS NOTE */
+        .founders-note {
+            background: rgba(166,137,76,0.03);
+            border-left: 2px solid var(--gold);
+            padding: 40px;
+            margin-top: 80px;
+        }
+        .founders-note h3 { font-family: var(--mono); font-size: 12px; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .founders-note p { font-family: var(--mono); font-size: 11px; color: var(--mid); line-height: 1.8; }
+
+        /* ARTICLE EXTENDED */
+        .article-extended { margin: 80px 0; }
+        .article-extended h2 { font-family: var(--display); font-size: 1.8rem; color: var(--gold); margin-bottom: 40px; text-align: center; }
+        .article-extended p { font-weight: 300; line-height: 2; font-size: 1.05rem; color: var(--mid); margin-bottom: 30px; text-align: justify; }
+
+        /* FOOTER */
+        footer{width:100%;padding:20px 40px;font-family:var(--mono);font-size:8px;color:var(--gold);border-top:1px solid var(--gold-dim);margin-top:auto;}
+        .footer-content{display:flex;justify-content:space-between;}
+
+        @media(max-width:700px){
+            .corporate-header{padding:12px 16px 5px;}
+            .enterprise-portal{grid-template-columns:1fr;padding:30px 20px;}
+            .revenue-block{grid-template-columns:1fr;}
+            .stats-strip{grid-template-columns:repeat(2,1fr);}
+            .state-row,.sim-step{grid-template-columns:1fr;}
+            .footer-content{flex-direction:column;gap:8px;}
+            header{margin:50px 0 60px;}
+        }
+    </style>
+</head>
+<body>
+
+<!-- CORPORATE HEADER -->
+<div class="corporate-header">
+    <div>BIN754975035</div>
+    <div class="header-center">Archer Chain Analytics</div>
+    <div>GST/HST754975035RT0001</div>
+</div>
+<div class="gold-line"></div>
+
+<!-- TICKER -->
+<div class="ticker-wrapper">
+    <div class="ticker-track" id="tickerTrack">
+        <span style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:0 20px;">Initialising Secure Ticker...</span>
+    </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav">
+    <div class="nav-inner">
+        <div class="nav-item products-pos">
+            <button class="nav-trigger">Infrastructure ▾</button>
+            <div class="nav-dropdown">
+                <a href="#">Sovereign Node Clusters</a>
+                <a href="#">The Alētheia Array™</a>
+                <a href="#">Hardened INxS™ Pipeline</a>
+                <a href="#">AcerbE™ Forensic Watermark</a>
+            </div>
+        </div>
+        <div class="nav-item hall-pos">
+            <button class="nav-trigger" style="color:var(--white);border-bottom:1px solid var(--gold);letter-spacing:4px;">SKOPO S™</button>
+            <div class="nav-dropdown">
+                <a href="#observer">Observer Architecture</a>
+                <a href="#states">State Transition Logic</a>
+                <a href="#simulation">Simulation Loop</a>
+                <a href="#revenue">Revenue Logic</a>
+            </div>
+        </div>
+        <div class="nav-item services-pos">
+            <button class="nav-trigger">Consultancy ▾</button>
+            <div class="nav-dropdown">
+                <a href="#">Security Implementation</a>
+                <a href="#">Regulatory Hardening</a>
+                <a href="#">The FAFO Guarantee</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header>
+    <div class="brand-logo">SkopOS™</div>
+    <div class="hero-sub">THE Operating System for Blockchain Observation</div>
+    <div class="quote-container">
+        <span class="red-quote">"SkopOS™ exists inside the blast radius of block production, not outside it."</span>
+        <br><br>
+        <span style="color:var(--red);font-family:var(--mono);font-size:10px;">— OPERATIONAL PRINCIPLE —</span>
+    </div>
+</header>
+
+<main class="content-body">
+
+    <!-- POSITIONING -->
+    <section class="article-box">
+        <h2>Sovereign Threat Intelligence at Chain Scale</h2>
+        <p>SkopOS™ is the autonomous bug-bounty sentinel built by Archer Chain Analytics. Operating across 305 separate blockchains through The Alētheia Array™, it delivers continuous observation, anomaly detection, ephemeral fork simulation, and forensic-grade proof generation — entirely within a closed, local-first execution environment. Zero telemetry. Zero intermediary. Zero exposure.</p>
+    </section>
+
+    <!-- STATS STRIP -->
+    <div class="stats-strip">
+        <div class="stat-cell">
+            <span class="stat-num">305</span>
+            <span class="stat-label">Blockchains Monitored</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-num">305</span>
+            <span class="stat-label">Asyncio Workers</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-num">&lt;50ms</span>
+            <span class="stat-label">Block-Event Latency</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-num">47.3x</span>
+            <span class="stat-label">Illustrative ROI Target</span>
+        </div>
+    </div>
+
+    <!-- ENTERPRISE PORTAL -->
+    <section id="observer" class="enterprise-portal">
+        <div>
+            <h3 style="font-family:var(--display);color:var(--gold);font-size:1.8rem;margin-bottom:20px;">The Alētheia Array™</h3>
+            <p style="color:var(--mid);font-size:0.95rem;line-height:1.6;text-align:left;">
+                305 sovereign listener modules. Ring 0/1 direct ingest — no public relay, zero intermediary latency. Every package SHA256 fingerprinted. Version 2.0-Hardened. The observation layer that makes SkopOS™ possible.
+            </p>
+        </div>
+        <div style="background:rgba(166,137,76,0.05);padding:30px;border-left:2px solid var(--gold);">
+            <ul class="ent-list">
+                <li>305 VERIFIED LISTENERS</li>
+                <li>RING 0/1 DIRECT INGEST</li>
+                <li>SHA256 FINGERPRINTED</li>
+                <li>ZERO INTERMEDIARY LATENCY</li>
+                <li>VERSION 2.0-HARDENED</li>
+                <li>NO PUBLIC RELAY</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- OP QUOTE -->
+    <blockquote class="op-quote">
+        <p>"Sovereignty is the product. Every ACA system is engineered for local-first execution, zero telemetry, and verifiable integrity."</p>
+        <cite>Archer Chain Analytics — Operational Standard</cite>
+    </blockquote>
+
+    <!-- STATE MACHINE -->
+    <section id="states" class="state-machine">
+        <div class="state-row">
+            <div class="state-tag">State 01</div>
+            <div class="state-desc"><strong>Watching</strong>SkopOS™ maintains continuous observation across all 305 listener feeds. No action taken. Block-state data accumulates.</div>
+        </div>
+        <div class="state-row">
+            <div class="state-tag">State 02</div>
+            <div class="state-desc"><strong>Alerting</strong>Candidate anomaly scored and queued. Cross-referenced against bounty registries. Raw block state logged.</div>
+        </div>
+        <div class="state-row">
+            <div class="state-tag">State 03</div>
+            <div class="state-desc"><strong>Proving</strong>Chain state snapshot captured at exact block height. Candidate condition replayed in isolated ephemeral fork in under 200ms.</div>
+        </div>
+        <div class="state-row">
+            <div class="state-tag">State 04</div>
+            <div class="state-desc"><strong>Reporting</strong>Validated findings 
