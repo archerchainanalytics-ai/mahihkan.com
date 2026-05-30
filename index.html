@@ -1,1 +1,350 @@
-6f5bf4139689962f994f11466b1c7d088234e95b
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahihkan.com</title>
+    <style>
+        :root {
+            --bg-main: #11161d;
+            --bg-card: #161e29;
+            --accent-gold: #dcae3f;
+            --accent-gold-hover: #c59932;
+            --text-muted: #7e8f9f;
+            --text-main: #cfd6dd;
+            --text-highlight: #ffd166;
+            --border-subtle: #242f3e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .site-container {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        /* --- Global Mahihkan Header --- */
+        .mahihkan-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
+
+        .brand-block {
+            display: flex;
+            gap: 16px;
+        }
+
+        .brand-logo {
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold);
+            font-weight: bold;
+            padding: 12px;
+            font-size: 20px;
+            letter-spacing: 1px;
+            display: inline-block;
+            line-height: 1;
+        }
+
+        .brand-text h1 {
+            font-size: 20px;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .brand-text h1 span {
+            color: var(--accent-gold);
+        }
+
+        .brand-description {
+            color: var(--text-muted);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1.4;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: var(--text-main);
+            background: var(--bg-card);
+            padding: 6px 14px;
+            border-radius: 2px;
+            border: 1px solid var(--border-subtle);
+            letter-spacing: 1px;
+        }
+
+        .status-node {
+            width: 8px;
+            height: 8px;
+            background-color: #52796f; 
+            border-radius: 50%;
+        }
+
+        /* --- Section Titles & Separation --- */
+        .section-header {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-header::after {
+            content: '';
+            flex: 1;
+            margin-left: 12px;
+            height: 1px;
+            background-color: var(--border-subtle);
+        }
+
+        /* --- Global Interactive Cards --- */
+        .interactive-zone {
+            border: 1px dashed var(--border-subtle);
+            background-color: var(--bg-main);
+            padding: 48px 24px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 32px;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .interactive-zone:hover {
+            border-color: var(--accent-gold);
+            background-color: var(--bg-card);
+        }
+
+        .zone-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+            color: var(--accent-gold);
+        }
+
+        .zone-primary-text {
+            color: var(--text-highlight);
+            font-weight: bold;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .zone-subtext {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        /* --- Navigation / Sub-Panel Tabs --- */
+        .site-nav-tabs {
+            display: flex;
+            gap: 28px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 24px;
+        }
+
+        .tab-item {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding-bottom: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .tab-item:hover, .tab-item.active {
+            color: var(--accent-gold);
+        }
+
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-gold);
+        }
+
+        /* --- Forms & Controls --- */
+        .control-group {
+            margin-bottom: 24px;
+        }
+
+        .control-label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .input-control {
+            width: 100%;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 14px;
+            font-family: inherit;
+            font-size: 13px;
+            border-radius: 2px;
+            transition: border-color 0.2s ease;
+        }
+
+        .input-control:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* --- Global Action Buttons --- */
+        .action-button {
+            width: 100%;
+            background-color: var(--accent-gold);
+            color: #11161d;
+            border: none;
+            padding: 18px;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: background-color 0.2s ease;
+        }
+
+        .action-button:hover {
+            background-color: var(--accent-gold-hover);
+        }
+
+        .button-marker {
+            width: 6px;
+            height: 6px;
+            background-color: #11161d;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="site-container">
+
+    <header class="mahihkan-header">
+        <div class="brand-block">
+            <div class="brand-logo">MH</div>
+            <div class="brand-text">
+                <h1>Mahihkan<span>.com</span></h1>
+                <div class="brand-description">Core Infrastructure Matrix<br>Digital Asset Router<br>Production Interface</div>
+            </div>
+        </div>
+        <div class="system-status">
+            <div class="status-node"></div>
+            <span>SYSTEM ON-LINE</span>
+        </div>
+    </header>
+
+    <section>
+        <div class="section-header">Workspace Hub</div>
+        <div class="interactive-zone" id="upload-matrix">
+            <div class="zone-icon">📁</div>
+            <div class="zone-primary-text">Initialize Local Working Directory</div>
+            <div class="zone-subtext">Drop components or folders here to stream asset configurations</div>
+        </div>
+    </section>
+
+    <nav class="site-nav-tabs">
+        <button class="tab-item active">Overview</button>
+        <button class="tab-item">Network Nodes</button>
+        <button class="tab-item">Global Settings</button>
+    </nav>
+
+    <main>
+        <div class="control-group">
+            <label class="control-label" for="target-routing">Primary Target Destination Routing</label>
+            <input type="text" id="target-routing" class="input-control" placeholder="/matrix/node/root/destination">
+        </div>
+
+        <div class="section-header">Environment Constants</div>
+
+        <div class="control-group">
+            <label class="control-label" for="secondary-routing">Fallback Sync Target (Optional)</label>
+            <input type="text" id="secondary-routing" class="input-control" placeholder="Defaults to main matrix cluster environment">
+        </div>
+
+        <div class="split-layout">
+            <div class="control-group">
+                <label class="control-label" for="max-threads">Thread Threshold</label>
+                <input type="text" id="max-threads" class="input-control" value="4,000 (Optimized)">
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="caching-state">Persistent Cache Engine</label>
+                <input type="text" id="caching-state" class="input-control" value="Active (Standard)">
+            </div>
+        </div>
+
+        <button type="submit" class="action-button">
+            <div class="button-marker"></div> Commit Matrix Operations
+        </button>
+    </main>
+
+</div>
+
+<script>
+    // Tab item selection handler
+    const navigationTabs = document.querySelectorAll('.tab-item');
+    navigationTabs.forEach(item => {
+        item.addEventListener('click', () => {
+            navigationTabs.forEach(tabElement => tabElement.classList.remove('active'));
+            item.classList.add('active');
+        });
+    });
+
+    // Drag-and-drop feedback handler
+    const interactiveMatrix = document.getElementById('upload-matrix');
+    interactiveMatrix.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        interactiveMatrix.style.borderColor = 'var(--accent-gold)';
+    });
+    interactiveMatrix.addEventListener('dragleave', () => {
+        interactiveMatrix.style.borderColor = 'var(--border-subtle)';
+    });
+</script>
+</body>
+</html>
